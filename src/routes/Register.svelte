@@ -1,19 +1,62 @@
 <script lang="ts">
   import { auth } from "../firebase/client";
-  import { createUserWithEmailAndPassword } from "firebase/auth";
-  import { notify } from "../libs/notify";
+  import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+  import { getNotificationsContext } from 'svelte-notifications';
+  import { replace } from 'svelte-spa-router'
+  import { onMount } from "svelte";
+
+  const { addNotification } = getNotificationsContext();
+
+  onMount(() => {
+    if (auth.currentUser) {
+      replace("/")
+    }
+  })
   
   let email = "";
   let username = "";
   let password = "";
 
   const handleRegister = async () => {
+    if (password.length < 6) {
+      addNotification({
+        text: 'Password must be at least 6 characters',
+        position: 'top-center',
+        type: 'error',
+        removeAfter: 2000,
+      })
+      return
+    }
+    
+    if (username.length < 3 || username.length>10) {
+      addNotification({
+        text: 'Password must be between 3 and 10 characters',
+        position: 'top-center',
+        type: 'error',
+        removeAfter: 2000,
+      })
+      return
+    }
+
     try {
       await createUserWithEmailAndPassword(auth, email, password)
-      notify("Logged in successfully", "success")
+      addNotification({
+        text: 'Registered user successfully',
+        position: 'top-center',
+        type: 'success',
+        removeAfter: 2000,
+      })
+      await updateProfile(auth.currentUser, { displayName: username })
+      replace("/")
     } catch (error) {
-      notify("Error logging in", "error")
+      addNotification({
+        text: 'Error registering user',
+        position: 'top-center',
+        type: 'error',
+        removeAfter: 2000,
+      })
     }
+    
   }
 </script>
 

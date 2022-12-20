@@ -1,18 +1,38 @@
 <script lang="ts">
+  import { onMount } from 'svelte';
   import { auth } from "../firebase/client";
   import { signInWithEmailAndPassword } from "firebase/auth";
-  import { notify } from "../libs/notify";
-
+  import { getNotificationsContext } from 'svelte-notifications';
+  import { replace } from "svelte-spa-router";
+  
+  const { addNotification } = getNotificationsContext();
 
   let email = "";
   let password = "";
 
+  onMount(() => {
+    if (auth.currentUser) {
+      replace("/")
+    }
+  })
+
   const handleRegister = async () => {
     try {
       await signInWithEmailAndPassword(auth, email, password);
-      notify("Logged in successfully", "success")
+      addNotification({
+        text: 'Logged in',
+        position: 'top-center',
+        type: 'success',
+        removeAfter: 2000,
+      })
+      replace("/")
     } catch (error) {
-      notify("Error logging in", "error")
+      addNotification({
+        text: 'Error logging in',
+        position: 'top-center',
+        type: 'success',
+        removeAfter: 2000,
+      })
     }
   }
 </script>

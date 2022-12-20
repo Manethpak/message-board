@@ -6,7 +6,6 @@
   import { userStore } from "../stores/user";
 
   let showMenu = false;
-  $: console.log($userStore);
 </script>
 
 <div class="hidden md:block">
@@ -14,12 +13,15 @@
     <a href="/" use:link class="text-xl hover:text-gray-300">Home</a>
     <a href="/" use:link class="text-xl hover:text-gray-300">About Us</a>
     <div class="md:px-20" />
+
     {#if $userStore === null}
     <a href="/login" use:link class="text-xl hover:text-gray-300">Login</a>
     <a href="/register" use:link class="text-xl hover:text-gray-300">Register</a>
     {:else}
+    <p class="text-xl">Hi, {$userStore.displayName}!</p>
     <button on:click={() => signOut(auth)} class="text-xl hover:text-gray-300">Logout</button>
     {/if}
+    
   </div>
   <div class="w-[90vw] border"/>
 </div>
@@ -31,12 +33,18 @@
   </div>
 
   {#if showMenu}
-  <ul transition:slide|local class="bg-neutral-600 w-full flex flex-col gap-4 py-2 px-4 mt-2">
-    <li class="">Home</li>
-    <li class="">About Us</li>
+  <ul transition:slide|local class="bg-neutral-600 w-full flex flex-col gap-4 py-2 px-4 mt-2 rounded-md">
+    <a href="/" use:link class=" hover:text-gray-300">Home</a>
+    <a href="/" use:link class=" hover:text-gray-300">About Us</a>
+    
+    {#if $userStore === null}
+    <a href="/login" use:link class=" hover:text-gray-300">Login</a>
+    <a href="/register" use:link class=" hover:text-gray-300">Register</a>
+    {:else}
+    <p class="">Hi, {$userStore.displayName}!</p>
+    <button on:click={() => signOut(auth)} class=" hover:text-gray-300">Logout</button>
+    {/if}
 
-    <li class="">Login</li>
-    <li class="">Register</li>
   </ul>
   {/if}
 </div>
