@@ -1,12 +1,48 @@
 <script lang="ts">
+  import {  push } from "svelte-spa-router";
   import Card from "../components/Card.svelte";
+  import Icon from 'svelte-icons-pack/Icon.svelte';
+  import AiOutlinePlusCircle from "svelte-icons-pack/ai/AiOutlinePlusCircle"; 
+  import { userStore } from "../stores/user";
+  import { collection, getDocs, orderBy, query } from "firebase/firestore";
+  import { db } from "../firebase/client";
 
-  let cats = Array(10).fill(0);
+  const navigate = () => {
+    if ($userStore) push("/post-board");
+  }
+
+  async function getPosts() {
+    const snap = await getDocs(query(collection(db, "posts"), orderBy("createdAt", "desc")));
+    if (snap.empty) {
+      throw new Error("No post found.");
+    }
+    return snap.docs
+  }
 </script>
 
 
 <section class="my-8 grid md:grid-cols-2 xl:grid-cols-3 gap-10">
-  {#each cats as cat}
-    <Card />
-  {/each}
+  <button href="/post-board" class="empty-card" 
+  on:click={navigate}>
+    {#if $userStore}
+    <Icon src={AiOutlinePlusCircle} size="5rem" color="white" />
+    <p class="text-gray-200">
+      Start a new Board
+    </p>
+    {:else}
+    <p class="text-gray-200">
+      Login to start a new Board
+    </p>
+    {/if}
+  </button>
+
+  {#await getPosts()}
+    <p class="empty-card">Loading...</p>
+  {:then posts}
+    {#each posts as post (post.id)}
+      <Card data={{...post.data(), id: post.id}} />
+    {/each}
+  {:catch error}    
+    <p class="empty-card">{error}</p>
+  {/await}
 </section>

@@ -19,4 +19,8 @@
   .btn-primary {
     @apply w-auto rounded-xl px-4 py-2 bg-neutral-500 hover:bg-neutral-600 text-neutral-100 transition-colors shadow-md;
   }
+
+  .empty-card {
+    @apply w-[20rem] min-h-[13rem] bg-neutral-800 rounded-xl shadow-xl p-4 cursor-pointer transition-all transform hover:-translate-y-2 justify-center items-center flex flex-col;
+  }
 }

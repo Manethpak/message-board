@@ -40,13 +40,13 @@
 
     try {
       await createUserWithEmailAndPassword(auth, email, password)
+      await updateProfile(auth.currentUser, { displayName: username })
       addNotification({
         text: 'Registered user successfully',
         position: 'top-center',
         type: 'success',
         removeAfter: 2000,
       })
-      await updateProfile(auth.currentUser, { displayName: username })
       replace("/")
     } catch (error) {
       addNotification({
