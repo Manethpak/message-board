@@ -54,6 +54,6 @@
 
   <button class="btn-primary" type="submit">Login</button>
   <p>
-    Don't have an account? <a href="#/login" class="hover:text-gray-400 underline">Register</a>
+    Don't have an account? <a href="#/register" class="hover:text-gray-400 underline">Register</a>
   </p>
 </form>
