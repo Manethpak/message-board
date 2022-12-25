@@ -1,0 +1,1 @@
+<footer class="mt-20 mb-8"> &#169; 2022 Maneth PAK. All rights reserved.</footer>
