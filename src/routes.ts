@@ -22,5 +22,8 @@ export const routes = {
   "/profile": wrap({
     asyncComponent: () => import("./routes/Profile.svelte"),
   }),
+  "/search/:query": wrap({
+    asyncComponent: () => import("./routes/Search.svelte"),
+  }),
   "*": NotFound,
 };
