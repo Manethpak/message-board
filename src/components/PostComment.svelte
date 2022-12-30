@@ -37,7 +37,7 @@
 
 <section>
   {#if $userStore}
-    <div class="flex justify-center mt-10 gap-2">
+    <div class="flex flex-col md:flex-row justify-center mt-10 gap-2">
       <input type="text" class="input w-full" placeholder="Write a comment..." bind:value={comment} />
       <button class="btn-primary" on:click={onComment}>Comment</button>
     </div>

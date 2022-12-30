@@ -49,7 +49,7 @@
   onDestroy(unsub)
 </script>
 
-<div class="mt-10">
+<div class="mt-10 px-4">
   <button class="ml-2 inline-flex" on:click={pop}>
     <Icon src={BiArrowBack} color="white" size="38" />
     <span>
@@ -60,7 +60,7 @@
   {#await promise}
   <p class="text-2xl">Loading...</p>
   {:then data}
-  <article class="w-[40rem] bg-neutral-800 p-6 mb-6 md:p-10 rounded-2xl">
+  <article class="md:w-[40rem] bg-neutral-800 p-6 mb-6 md:p-10 rounded-2xl">
     {#if $userStore && $userStore.uid === data.author.uid}
       <div class="flex justify-end gap-6">
         <button class="hover:underline" on:click={onDelete}>Delete</button>

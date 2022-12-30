@@ -21,12 +21,12 @@
 
 </script>
 
-<div class="w-full h-20 bg-neutral-800 rounded-xl mt-2 py-4 px-8">
-  <div class="flex justify-between">
-    <p class="text-sm text-gray-500 mb-1">{comment.author.displayName}: <time>{toCalenderTime(comment.timestamp.seconds)}</time></p>
-    {#if $userStore && $userStore.uid === comment.author.uid}
-      <button on:click={() => deleteComment(comment)} class="hover:underline">Delete</button>
-    {/if}
-  </div>
+<div class="w-full h-fit bg-neutral-800 rounded-xl mt-2 py-4 px-8 relative">
+  <p class="text-sm text-gray-500 mb-1">{comment.author.displayName}: <time>{toCalenderTime(comment.timestamp.seconds)}</time></p>
   <p>{comment.text}</p>
+  {#if $userStore && $userStore.uid === comment.author.uid}
+  <div class="flex justify-end">
+    <button on:click={() => deleteComment(comment)} class="hover:underline">Delete</button>
+  </div>
+  {/if}
 </div>
