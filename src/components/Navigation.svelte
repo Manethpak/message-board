@@ -11,7 +11,7 @@
 <nav class="hidden md:block">
   <div class="flex gap-10 justify-center">
     <a href="/" use:link class="text-xl hover:text-gray-300">Home</a>
-    <a href="/" use:link class="text-xl hover:text-gray-300">About Us</a>
+    <a href="/about-us" use:link class="text-xl hover:text-gray-300">About Us</a>
     <div class="md:px-20" />
 
     {#if $userStore === null}

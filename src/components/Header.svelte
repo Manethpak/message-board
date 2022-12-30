@@ -1,10 +1,10 @@
 <script lang="ts">
-  import { replace } from "svelte-spa-router";
+  import { push } from "svelte-spa-router";
 
   let searchKey = "";
 
   const handleSubmit = () => {
-    replace(`/search/${searchKey}`);
+    push(`/search/${searchKey}`);
   }
 
 </script>
