@@ -20,6 +20,9 @@ With this project I was able to learn how to use svelte and firebase together to
 
 - [Svelte](https://svelte.dev/)
 - [Firebase](https://firebase.google.com/)
+  - [Authentication](https://firebase.google.com/docs/auth)
+  - [Firestore](https://firebase.google.com/docs/firestore)
+  - [Appcheck](https://firebase.google.com/docs/app-check)
 
 ## Demo
 
